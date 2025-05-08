@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # backend
 
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
@@ -47,3 +48,7 @@ If the server starts successfully, you'll see the following output:
 2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
 ```
 
+=======
+# backend-app-eccomerce
+Projetos Pessoais
+>>>>>>> 7b7e750ae847e0c2214966cd967d51076f90289b
