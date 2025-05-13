@@ -7,13 +7,13 @@ import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 
 fun Application.configureSecurity() {
-    // Please read the jwt property from the config file if you are using EngineMain
     val jwtAudience = "jwt-audience"
     val jwtDomain = "https://jwt-provider-domain/"
     val jwtRealm = "ktor sample app"
     val jwtSecret = "secret"
-    authentication {
-        jwt {
+
+    install(Authentication) { // 🔹 Agora Ktor registra a configuração corretamente!
+        jwt("jwt-auth") { // 🔹 Certifique-se de que este nome está sendo usado no `authenticate("jwt-auth")`
             realm = jwtRealm
             verifier(
                 JWT

@@ -61,30 +61,30 @@ object ProductRepository {
 
     fun createProduct(product: Product) = transaction {
         ProductsSchema.insert { row ->
-            row[ProductsSchema.id] = product.id  // se estiver usando UUID, gere com UUID.randomUUID().toString()
-            row[ProductsSchema.name] = product.name
-            row[ProductsSchema.description] = product.description
-            row[ProductsSchema.imageUri] = product.imageUri
-            row[ProductsSchema.price] = product.price
-            row[ProductsSchema.stock] = product.stock
-            row[ProductsSchema.isOnPromotion] = product.isOnPromotion
-            row[ProductsSchema.promotionPrice] = product.promotionPrice
-            row[ProductsSchema.brand] = product.brand
-            row[ProductsSchema.available] = product.available
+            row[id] = product.id  // se estiver usando UUID, gere com UUID.randomUUID().toString()
+            row[name] = product.name
+            row[description] = product.description
+            row[imageUri] = product.imageUri
+            row[price] = product.price
+            row[stock] = product.stock
+            row[isOnPromotion] = product.isOnPromotion
+            row[promotionPrice] = product.promotionPrice
+            row[brand] = product.brand
+            row[available] = product.available
         }
     }
 
     fun updateProduct(id: String, product: Product) = transaction {
         ProductsSchema.update({ ProductsSchema.id eq id }) { row ->
-            row[ProductsSchema.name] = product.name
-            row[ProductsSchema.description] = product.description
-            row[ProductsSchema.imageUri] = product.imageUri
-            row[ProductsSchema.price] = product.price
-            row[ProductsSchema.stock] = product.stock
-            row[ProductsSchema.isOnPromotion] = product.isOnPromotion
-            row[ProductsSchema.promotionPrice] = product.promotionPrice
-            row[ProductsSchema.brand] = product.brand
-            row[ProductsSchema.available] = product.available
+            row[name] = product.name
+            row[description] = product.description
+            row[imageUri] = product.imageUri
+            row[price] = product.price
+            row[stock] = product.stock
+            row[isOnPromotion] = product.isOnPromotion
+            row[promotionPrice] = product.promotionPrice
+            row[brand] = product.brand
+            row[available] = product.available
         }
     }
 
