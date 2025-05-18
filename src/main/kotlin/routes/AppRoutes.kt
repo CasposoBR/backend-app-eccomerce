@@ -9,6 +9,20 @@ fun Route.appRoutes() {
         get("/health") {
             AppController.healthCheck(call)
         }
-        // Outras rotas específicas do AppController podem ser adicionadas aqui
+
+
+        get("/session") {
+            AppController.getUserSession(call)
+        }
+
+
+        post("/login") {
+            AppController.loginUser(call)
+        }
+
+
+        post("/register") {
+            AppController.registerUser(call)
+        }
     }
 }
