@@ -7,6 +7,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
+import java.util.*
 
 
 data class Product(
@@ -28,7 +29,7 @@ object ProductRepository {
     fun getAllProducts(): List<Product> = transaction {
         ProductsSchema.selectAll().map { row ->
             Product(
-                id = row[ProductsSchema.id],
+                id = row[ProductsSchema.id].toString(),
                 name = row[ProductsSchema.name],
                 description = row[ProductsSchema.description],
                 imageUri = row[ProductsSchema.imageUri],
@@ -36,6 +37,7 @@ object ProductRepository {
                 stock = row[ProductsSchema.stock],
                 isOnPromotion = row[ProductsSchema.isOnPromotion],
                 promotionPrice = row[ProductsSchema.promotionPrice],
+                isFavorite = row[ProductsSchema.isFavorite],
                 brand = row[ProductsSchema.brand],
                 available = row[ProductsSchema.available]
             )
@@ -43,10 +45,10 @@ object ProductRepository {
     }
 
     fun getProductById(id: String): Product? = transaction {
-        ProductsSchema.select(ProductsSchema.id eq id)
+        ProductsSchema.select(ProductsSchema.id eq UUID.fromString(id))
             .mapNotNull { row ->
                 Product(
-                    id = row[ProductsSchema.id],
+                    id = row[ProductsSchema.id].toString(),
                     name = row[ProductsSchema.name],
                     description = row[ProductsSchema.description],
                     imageUri = row[ProductsSchema.imageUri],
@@ -54,6 +56,7 @@ object ProductRepository {
                     stock = row[ProductsSchema.stock],
                     isOnPromotion = row[ProductsSchema.isOnPromotion],
                     promotionPrice = row[ProductsSchema.promotionPrice],
+                    isFavorite = row[ProductsSchema.isFavorite],
                     brand = row[ProductsSchema.brand],
                     available = row[ProductsSchema.available]
                 )
@@ -62,7 +65,7 @@ object ProductRepository {
 
     fun createProduct(product: Product) = transaction {
         ProductsSchema.insert { row ->
-            row[id] = product.id  // se estiver usando UUID, gere com UUID.randomUUID().toString()
+            row[id] = UUID.fromString(product.id)
             row[name] = product.name
             row[description] = product.description
             row[imageUri] = product.imageUri
@@ -70,13 +73,14 @@ object ProductRepository {
             row[stock] = product.stock
             row[isOnPromotion] = product.isOnPromotion
             row[promotionPrice] = product.promotionPrice
+            row [isFavorite] = product.isFavorite
             row[brand] = product.brand
             row[available] = product.available
         }
     }
 
     fun updateProduct(id: String, product: Product) = transaction {
-        ProductsSchema.update({ ProductsSchema.id eq id }) { row ->
+        ProductsSchema.update({ ProductsSchema.id eq UUID.fromString(id) }) { row ->
             row[name] = product.name
             row[description] = product.description
             row[imageUri] = product.imageUri
@@ -84,13 +88,14 @@ object ProductRepository {
             row[stock] = product.stock
             row[isOnPromotion] = product.isOnPromotion
             row[promotionPrice] = product.promotionPrice
+            row [isFavorite] = product.isFavorite
             row[brand] = product.brand
             row[available] = product.available
         }
     }
 
     fun deleteProduct(id: String) = transaction {
-        ProductsSchema.deleteWhere { ProductsSchema.id eq id }
+        ProductsSchema.deleteWhere { ProductsSchema.id eq UUID.fromString(id) }
     }
 }
 

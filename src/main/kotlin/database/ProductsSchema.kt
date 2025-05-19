@@ -1,10 +1,11 @@
 package com.mygamingstore.database
 
 import org.jetbrains.exposed.sql.Table
+import java.util.*
 
 object ProductsSchema : Table("products") {
 
-    val id = varchar("id", 36)
+    val id = uuid("id").default(UUID.randomUUID())
     val name = varchar("name", 255)
     val description = text("description")
     val imageUri = varchar("image_uri", 512)

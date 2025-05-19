@@ -12,8 +12,8 @@ fun Application.configureSecurity() {
     val jwtRealm = "ktor sample app"
     val jwtSecret = "secret"
 
-    install(Authentication) { // 🔹 Agora Ktor registra a configuração corretamente!
-        jwt("jwt-auth") { // 🔹 Certifique-se de que este nome está sendo usado no `authenticate("jwt-auth")`
+    install(Authentication) { //
+        jwt("jwt-auth") {
             realm = jwtRealm
             verifier(
                 JWT
