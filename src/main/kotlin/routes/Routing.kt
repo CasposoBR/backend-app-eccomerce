@@ -21,6 +21,7 @@ fun Application.configureRouting() {
     }
 
     routing {
+        appRoutes()
         // Rota pública de boas-vindas
         get("/") {
             call.respondText("Bem-vindo ao GamingStore!")
@@ -30,6 +31,15 @@ fun Application.configureRouting() {
         route("/app") {
             get("/health") {
                 AppController.healthCheck(call)
+            }
+
+            get("/session") {  // 🔹 Agora define a rota corretamente!
+                val userId = call.request.queryParameters["userId"]
+                if (userId.isNullOrEmpty()) {
+                    call.respond(HttpStatusCode.BadRequest, "userId não informado!")
+                } else {
+                    call.respond(HttpStatusCode.OK, mapOf("message" to "Sessão iniciada!", "userId" to userId))
+                }
             }
         }
 

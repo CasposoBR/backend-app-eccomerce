@@ -3,7 +3,9 @@ ktor:
     modules:
       - com.mygamingstore.ApplicationKt.module
   deployment:
-    port: 8080
+port: 8080
+host: "0.0.0.0"
+callTimeout: 30000
 
 postgres:
   url: "jdbc:postgresql://localhost/default"

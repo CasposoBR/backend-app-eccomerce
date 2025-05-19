@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 fun Application.configureDatabases() {
     fun init() {
         Database.connect(
-            url = "jdbc:postgresql://localhost:5432/gamingstore", // altere para sua URL
+            url = "jdbc:postgresql://10.0.2.2:5432/gamingstore", // altere para sua URL
             driver = "org.postgresql.Driver",
             user = "admin",
             password = "password"
