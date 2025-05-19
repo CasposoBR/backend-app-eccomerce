@@ -16,6 +16,7 @@ data class Product(
     val imageUri: String,
     val price: Double,
     val stock: Int,
+    var isFavorite: Boolean = false,
     val isOnPromotion: Boolean,
     val promotionPrice: Double?,
     val brand: String,
